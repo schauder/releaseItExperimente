@@ -2,13 +2,13 @@ package de.schauderhaft.releaseit.main.controller;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
-import de.schauderhaft.releaseit.main.service.BaneService;
+import de.schauderhaft.releaseit.main.service.SimpleService;
 
 public class WebRequestCommand extends HystrixCommand<String> {
-    private final BaneService baneService;
+    private final SimpleService baneService;
 
-    protected WebRequestCommand(BaneService baneService) {
-        super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+    protected WebRequestCommand(SimpleService baneService) {
+        super(HystrixCommandGroupKey.Factory.asKey("NewGroup"));
         this.baneService = baneService;
     }
 
