@@ -1,26 +1,26 @@
-package de.schauderhaft.releaseit.main.service;
+package de.schauderhaft.releaseit.main.repository;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import de.schauderhaft.releaseit.main.controller.IoUtils;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 
-@Service
-public class SimpleService {
+@Repository
+public class EvilDataRepository {
 
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    public static String main(String urlString)  {
+    public String connectToEvilEndpoint() {
+        return connect("http://localhost:8000/ok");
+    }
+
+    private String connect(String urlString) {
         final GenericUrl url = new GenericUrl(URI.create(urlString));
         final HttpRequestFactory factory = HTTP_TRANSPORT.createRequestFactory();
-
-
 
         try {
             final HttpRequest request = factory.buildGetRequest(url);
@@ -33,9 +33,5 @@ public class SimpleService {
             throw new RuntimeException(exception);
         }
         throw new RuntimeException("No Result");
-    }
-
-    public String connectToBane() {
-        return main("http://localhost:8000/ok");
     }
 }

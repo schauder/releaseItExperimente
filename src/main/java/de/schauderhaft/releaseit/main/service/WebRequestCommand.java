@@ -1,14 +1,14 @@
-package de.schauderhaft.releaseit.main.controller;
+package de.schauderhaft.releaseit.main.service;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
-import de.schauderhaft.releaseit.main.service.SimpleService;
+import de.schauderhaft.releaseit.main.repository.EvilDataRepository;
 
 public class WebRequestCommand extends HystrixCommand<String> {
-    private final SimpleService baneService;
+    private final EvilDataRepository baneService;
 
-    protected WebRequestCommand(SimpleService baneService) {
+    public WebRequestCommand(EvilDataRepository baneService) {
 
         super(
                 Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("test"))
@@ -20,7 +20,7 @@ public class WebRequestCommand extends HystrixCommand<String> {
 
     @Override
     protected String run() {
-        return baneService.connectToBane();
+        return baneService.connectToEvilEndpoint();
     }
 
     @Override
