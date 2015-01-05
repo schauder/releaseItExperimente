@@ -12,4 +12,4 @@ Endpoints
 - `/defective/[true|false]` set defective flag to true / false
 - `/slowresponse` Write one byte per second and flush each iteration
 - `/slowresponsenoflush` Write one byte per second but never flush before finish
-
+- `/deluge` Write lots of masterly crafted bytes

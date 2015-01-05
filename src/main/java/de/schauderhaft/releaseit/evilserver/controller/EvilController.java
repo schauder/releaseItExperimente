@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Random;
 
 @Controller
 public class EvilController {
@@ -66,4 +67,15 @@ public class EvilController {
             Thread.sleep(1000);
         }
     }
+
+    @RequestMapping("/deluge")
+    void deluge(HttpServletResponse response) throws IOException {
+        Random random = new Random();
+        while (true) {
+            ServletOutputStream outputStream = response.getOutputStream();
+            outputStream.write(random.nextInt(255));
+            outputStream.flush();
+        }
+    }
+
 }
