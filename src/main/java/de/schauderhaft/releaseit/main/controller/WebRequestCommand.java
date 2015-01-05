@@ -22,4 +22,9 @@ public class WebRequestCommand extends HystrixCommand<String> {
     protected String run() {
         return baneService.connectToBane();
     }
+
+    @Override
+    protected String getFallback() {
+       return "SERVICE NOT AVAILABLE";
+    }
 }
