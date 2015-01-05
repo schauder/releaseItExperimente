@@ -6,21 +6,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 @Controller
 public class SampleController {
-
-    private BaneService baneService;
+    private final WebRequestCommand webService;
 
     @Autowired
     public SampleController(BaneService baneService) {
-        this.baneService = baneService;
+         webService = new WebRequestCommand(baneService);
+    }
+
+    @RequestMapping("/")
+    @ResponseBody
+    String home() {
+        System.out.println(webService.run());
+        return "Alles ist Gut!";
     }
 
     @RequestMapping("/ok")
     @ResponseBody
-    String home() {
-        return "Hello, World!";
+    String ok() {
+        return "ok";
     }
 
     @RequestMapping("/wait/{time}")
