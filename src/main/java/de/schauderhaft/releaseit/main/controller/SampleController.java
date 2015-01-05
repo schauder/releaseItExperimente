@@ -12,7 +12,7 @@ public class SampleController {
 
     @Autowired
     public SampleController(BaneService baneService) {
-         webService = new WebRequestCommand(baneService);
+        webService = new WebRequestCommand(baneService);
     }
 
     @RequestMapping("/")
@@ -20,27 +20,5 @@ public class SampleController {
     String home() {
         System.out.println(webService.run());
         return "Alles ist Gut!";
-    }
-
-    @RequestMapping("/ok")
-    @ResponseBody
-    String ok() {
-        return "ok";
-    }
-
-    @RequestMapping("/wait/{time}")
-    @ResponseBody
-    String wait(@PathVariable("time") Long time) {
-        try {
-            Thread.sleep(time * 1000);
-        } catch (InterruptedException e) {
-        }
-        return "Hello, World!";
-    }
-
-    @RequestMapping("/500")
-    @ResponseBody
-    String gimmefive() {
-        throw new RuntimeException("Good bye, World!");
     }
 }
