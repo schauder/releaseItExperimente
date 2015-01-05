@@ -1,13 +1,15 @@
 # Getting Started
 
-## install Bane für bösartige Antworten
+## EvilServer
 
-    gem install bane
+Start `EvilServerStarter` class. Default EvilServer port is 8000.
 
-## bane starten und testen:
+Endpoints
 
-    bane 8080 FixedResponse
+- `/ok` Return 200 StatusCode and _Hello, World!_ unless defective flag is set (`/wait` behaviour with 5 seconds)
+- `/wait/<sec>` Wait `<sec>` seconds then return 200 StatusCode and _Hello, World!_
+- `/500` Throw RuntimeException
+- `/defective/[true|false]` set defective flag to true / false
+- `/slowresponse` Write one byte per second and flush each iteration
+- `/slowresponsenoflush` Write one byte per second but never flush before finish
 
-    curl "http://localhost:8080/hallo"
-
-hallo ist optional
