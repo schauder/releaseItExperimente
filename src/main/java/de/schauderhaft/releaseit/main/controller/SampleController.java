@@ -5,21 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
- // nur für testzwecke
 @Controller
 public class SampleController {
-// anderere kommentar
-    private BaneService baneService;
+    private final WebRequestCommand webService;
 
     @Autowired
     public SampleController(BaneService baneService) {
-        this.baneService = baneService;
+         webService = new WebRequestCommand(baneService);
     }
 
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        baneService.connectToBane();
+        System.out.println(webService.run());
         return "Hello World!";
     }
 }
