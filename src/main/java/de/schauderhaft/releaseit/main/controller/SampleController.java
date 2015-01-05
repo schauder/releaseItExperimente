@@ -36,7 +36,7 @@ public class SampleController {
             WebRequestCommand webService = new WebRequestCommand(baneService);
             result = webService.queue().get(5000, MILLISECONDS);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             result = "geht gerade nicht.";
         }
         return "Alles ist Gut: " + (System.currentTimeMillis() - start) + " " + result;
