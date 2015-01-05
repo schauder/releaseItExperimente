@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  // nur für testzwecke
 @Controller
 public class SampleController {
-
+// anderere kommentar
     @RequestMapping("/")
     @ResponseBody
     String home() {
