@@ -7,11 +7,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class EvilController {
+    private boolean defective = false;
 
     @RequestMapping("/ok")
     @ResponseBody
-    String home() {
-        return "Hello, World!";
+    String ok() {
+        if (defective) {
+            return wait(Long.valueOf(5));
+        } else {
+            return "Hello, World!";
+        }
     }
 
     @RequestMapping("/wait/{time}")
@@ -28,5 +33,12 @@ public class EvilController {
     @ResponseBody
     String gimmefive() {
         throw new RuntimeException("Good bye, World!");
+    }
+
+    @RequestMapping("/defective/{flag}")
+    @ResponseBody
+    String defective(@PathVariable("flag") Boolean flag) {
+        defective = flag;
+        return String.format("defective set to %s", flag);
     }
 }
