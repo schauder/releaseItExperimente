@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @Controller
 public class EvilController {
     private boolean defective = false;
@@ -40,5 +44,26 @@ public class EvilController {
     String defective(@PathVariable("flag") Boolean flag) {
         defective = flag;
         return String.format("defective set to %s", flag);
+    }
+
+    @RequestMapping("/slowresponse")
+    void slowResponse(HttpServletResponse response) throws IOException, InterruptedException {
+        byte[] bytes = "Hello waiting world".getBytes();
+        ServletOutputStream outputStream = response.getOutputStream();
+        for (byte aByte : bytes) {
+            outputStream.write(aByte);
+            outputStream.flush();
+            Thread.sleep(1000);
+        }
+    }
+
+    @RequestMapping("/slowresponsenoflush")
+    void slowResponseNoFlush(HttpServletResponse response) throws IOException, InterruptedException {
+        byte[] bytes = "Hello waiting world".getBytes();
+        ServletOutputStream outputStream = response.getOutputStream();
+        for (byte aByte : bytes) {
+            outputStream.write(aByte);
+            Thread.sleep(1000);
+        }
     }
 }
