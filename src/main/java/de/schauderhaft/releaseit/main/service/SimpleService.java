@@ -36,6 +36,6 @@ public class SimpleService {
     }
 
     public String connectToBane() {
-        return main("http://localhost:8000/ok");
+        return main("http://localhost:8000/wait/1");
     }
 }
