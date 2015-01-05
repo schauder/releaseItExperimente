@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"de.schauderhaft.releaseit"})
+@ComponentScan(basePackages = {"de.schauderhaft.releaseit.evilserver"})
 public class EvilServerStarter {
 
     public static void main(String[] args) throws Exception {
