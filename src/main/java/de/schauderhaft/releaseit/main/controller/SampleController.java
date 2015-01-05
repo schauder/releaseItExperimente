@@ -15,10 +15,17 @@ public class SampleController {
          webService = new WebRequestCommand(baneService);
     }
 
-    @RequestMapping("/ok")
+    @RequestMapping("/")
     @ResponseBody
     String home() {
         System.out.println(webService.run());
+        return "Alles ist Gut!";
+    }
+
+    @RequestMapping("/ok")
+    @ResponseBody
+    String ok() {
+        return "ok";
     }
 
     @RequestMapping("/wait/{time}")
