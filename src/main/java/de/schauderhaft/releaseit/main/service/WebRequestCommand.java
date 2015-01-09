@@ -14,7 +14,10 @@ public class WebRequestCommand extends HystrixCommand<String> {
                 Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("test"))
                         .andCommandPropertiesDefaults(
                                 HystrixCommandProperties.Setter()
-                                        .withExecutionIsolationThreadTimeoutInMilliseconds(500)));
+                                        .withExecutionIsolationThreadTimeoutInMilliseconds(500)
+                                .withMetricsRollingStatisticalWindowInMilliseconds(20000)
+                        )
+        );
         this.baneService = baneService;
     }
 
@@ -25,6 +28,6 @@ public class WebRequestCommand extends HystrixCommand<String> {
 
     @Override
     protected String getFallback() {
-       return "SERVICE NOT AVAILABLE";
+        return "SERVICE NOT AVAILABLE";
     }
 }
